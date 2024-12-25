@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:websafe_svg/websafe_svg.dart';
 import '../../constants.dart';
 import 'components/header.dart';
 import 'package:submission_dicoding/models/email.dart';
@@ -20,7 +18,6 @@ class EmailScreen extends StatelessWidget {
         color: Colors.white,
         child: SafeArea(
           child: SingleChildScrollView(
-            // Make the entire content scrollable
             child: Column(
               children: [
                 const Header(),
@@ -90,51 +87,36 @@ class EmailScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: kDefaultPadding),
                             if (email.isAttachmentAvailable)
-                              Row(
+                              const Row(
                                 children: [
-                                  const Text(
+                                  Text(
                                     "1 attachment", // Dummy number
                                     style: TextStyle(fontSize: 12),
-                                  ),
-                                  const Spacer(),
-                                  Text(
-                                    "Download All",
-                                    style:
-                                        Theme.of(context).textTheme.bodySmall,
-                                  ),
-                                  const SizedBox(width: kDefaultPadding / 4),
-                                  WebsafeSvg.asset(
-                                    "assets/Icons/Download.svg",
-                                    height: 16,
-                                    colorFilter: const ColorFilter.mode(
-                                      kGrayColor,
-                                      BlendMode.srcIn,
-                                    ),
                                   ),
                                 ],
                               ),
                             const Divider(thickness: 1),
                             const SizedBox(height: kDefaultPadding / 2),
                             if (email.isAttachmentAvailable)
-                              SizedBox(
-                                height: 200,
-                                child: StaggeredGrid.count(
-                                  crossAxisCount: 4,
+                              GridView.builder(
+                                physics:
+                                    const NeverScrollableScrollPhysics(), 
+                                shrinkWrap:
+                                    true, 
+                                gridDelegate:
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2, 
+                                  childAspectRatio:
+                                      1.5, 
                                   mainAxisSpacing: kDefaultPadding,
                                   crossAxisSpacing: kDefaultPadding,
-                                  children: List.generate(
-                                    3,
-                                    (int index) => StaggeredGridTile.count(
-                                      crossAxisCellCount: 2,
-                                      mainAxisCellCount: index.isOdd ? 2 : 1,
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(8),
-                                        child: Image.asset(
-                                          "assets/images/Img_$index.png", // Example image
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
+                                ),
+                                itemCount: 3, 
+                                itemBuilder: (context, index) => ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: Image.asset(
+                                    "assets/images/Img_$index.png", // Example image
+                                    fit: BoxFit.cover, 
                                   ),
                                 ),
                               ),
