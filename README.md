@@ -60,10 +60,6 @@ Feel free to customize the theme and add additional features to enhance the appl
 
 ---
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## 📞 Contact
 
 For any inquiries, please reach out to [Zoe Mohamed](mailto:jolearnacc@gmail.com).
